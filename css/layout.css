@@ -17,9 +17,6 @@
   display: flex;
   justify-content: space-between;
 }
-.navbar .container .switch_default {
-  display: none;
-}
 .main {
   flex-grow: 1;
   flex-shrink: 0;
