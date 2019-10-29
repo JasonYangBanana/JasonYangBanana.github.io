@@ -101,9 +101,7 @@
 </script>
         <div class="main">
             <div class="container">
-    
-    
-        <div class="post-toc">
+    <div class="post-toc">
     <div class="tocbot-list">
     </div>
     <div class="tocbot-list-menu">
@@ -163,31 +161,26 @@
         window.scrollTo(0, document.body.scrollHeight);
     }
 
-</script>
-    
+</script>  
+  <article class="post-wrap">
+    <header class="post-header">
+      <h1 class="post-title">JavaScript 的型別</h1>
+      
+      <div class="post-meta">
+         Author:
+        <a itemprop="author" rel="author" href="/">Jason Yang</a>
+         
+        <span class="post-time">
+          Date:
+          <a href="#">October 29, 2019&nbsp;&nbsp;18:13:26</a>
+        </span>
+         
+      </div>
+      
+    </header>
 
-    
-    <article class="post-wrap">
-        <header class="post-header">
-            <h1 class="post-title">JavaScript 的型別</h1>
-            
-                <div class="post-meta">
-                    
-                        Author: <a itemprop="author" rel="author" href="/">Jason Yang</a>
-                    
-
-                    
-                        <span class="post-time">
-                        Date: <a href="#">October 29, 2019&nbsp;&nbsp;18:13:26</a>
-                        </span>
-                    
-                    
-                </div>
-            
-        </header>
-
-        <div class="post-content">
-            <p>一開始進入 JavaScript 不免俗的要知道其型別。<br>分為兩種 <strong>基本型別值(Primitive)</strong> 和 <strong>物件型別(object)</strong></p>
+    <div class="post-content">
+      <p>一開始進入 JavaScript 不免俗的要知道其型別。<br>分為兩種 <strong>基本型別值(Primitive)</strong> 和 <strong>物件型別(object)</strong></p>
 <h1 id="基本型別值"><a href="#基本型別值" class="headerlink" title="基本型別值"></a>基本型別值</h1><p>基本型別值有六種： <code>string</code> 、 <code>number</code> 、 <code>boolean</code> 、 <code>null</code> 、 <code>undefined</code> 和 <code>symbol</code>。</p>
 <p><code>string</code><br>字串是由許多字元組成，用來標示文字。</p>
 <p><code>number</code><br>JS 使用的是 IEEE 754 標準的 <strong>雙精度浮點數</strong>。<br>值得注意的是，浮點數運算存在著一些問題，最著名的就是 <code>0.1 + 0.2 === 0.3</code> 會得到 <code>false</code>。<br>在 ES6 後我們會使用下面這個方式來驗證兩數是否相等</p>
@@ -202,38 +195,10 @@
 <h1 id="object-物件型別"><a href="#object-物件型別" class="headerlink" title="object(物件型別)"></a>object(物件型別)</h1><p>不屬於上述基本型別值的就屬於物件型別</p>
 <h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>You Don’t know JS: Up &amp; Going, types &amp; Grammar</p>
 
-        </div>
+    </div>
 
-        
-            <section class="post-copyright">
-                
-                    <p class="copyright-item">
-                        <span>Author:</span>
-                        <span>Jason Yang</span>
-                    </p>
-                
-                
-                    <p class="copyright-item">
-                        <span>Permalink:</span>
-                        <span><a href="http://yoursite.com/2019/10/29/JavaScript 的型別/">http://yoursite.com/2019/10/29/JavaScript 的型別/</a></span>
-                    </p>
-                
-                
-                    <p class="copyright-item">
-                        <span>License:</span>
-                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
-                    </p>
-                
-                
-                     <p class="copyright-item">
-                         <span>Slogan:</span>
-                         <span>Do you believe in <strong>DESTINY<strong>?</strong></strong></span>
-                     </p>
-                
-
-            </section>
-        
-        <section class="post-tags">
+    
+    <!-- <section class="post-tags">
             <div>
                 <span>Tag(s):</span>
                 <span class="tag">
@@ -245,16 +210,13 @@
                 <span>· </span>
                 <a href="/">home</a>
             </div>
-        </section>
-        <section class="post-nav">
-            
-            
-            <a class="next" rel="next" href="/2019/08/01/hello-world/">Hello World</a>
-            
-        </section>
-
-
-    </article>
+        </section> -->
+    <section class="post-nav">
+       
+      <a class="next" rel="next" href="/2019/08/01/hello-world/">Hello World</a>
+      
+    </section>
+  </article>
 </div>
 
         </div>
