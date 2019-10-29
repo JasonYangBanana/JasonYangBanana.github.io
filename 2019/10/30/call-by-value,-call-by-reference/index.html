@@ -7,7 +7,7 @@
 
 
 
-<title>Hello World | Jason&#39;s Blog</title>
+<title>call by value, call by reference | Jason&#39;s Blog</title>
 
 
 
@@ -164,7 +164,7 @@
 </script>  
   <article class="post-wrap">
     <header class="post-header">
-      <h1 class="post-title">Hello World</h1>
+      <h1 class="post-title">call by value, call by reference</h1>
       
       <div class="post-meta">
          Author:
@@ -172,7 +172,7 @@
          
         <span class="post-time">
           Date:
-          <a href="#">August 1, 2019&nbsp;&nbsp;14:05:09</a>
+          <a href="#">October 30, 2019&nbsp;&nbsp;2:49:02</a>
         </span>
          
       </div>
@@ -180,19 +180,16 @@
     </header>
 
     <div class="post-content">
-      <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+      <p>如果不能搞懂原生 JS 的數值會怎麼變化，後續在編寫程式會遇上不小麻煩</p>
+<h1 id="call-by-value"><a href="#call-by-value" class="headerlink" title="call by value"></a>call by value</h1><p>在 JS 中的基本型別值，其賦予值的方式為此。<br>在做指派運算子時，其實是將 <code>變數</code> 指向 <code>值</code> 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">10</span></span><br><span class="line"><span class="keyword">let</span> b = a</span><br><span class="line">a = <span class="number">20</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">//20</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">//10</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>上述例子，即使 a 變動了， b 不會因此而跟著改變。<br>因為在 <code>b = a</code> 時， b 這個變數指向了 a 原本所指向的值 <code>10</code></p>
+<h1 id="call-by-reference"><a href="#call-by-reference" class="headerlink" title="call by reference"></a>call by reference</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> c = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="keyword">let</span> d = c</span><br><span class="line">c[<span class="number">0</span>] = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(c) <span class="comment">//[2, 2, 3, 4];</span></span><br><span class="line"><span class="built_in">console</span>.log(d) <span class="comment">//[2, 2, 3, 4];</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>特別要注意的是，跟基本型別不同，<br>以上面為例，在複合型別時，<br>他們只會指向該 array， 而該 array 內的 的各個 slot 會再指向其儲存的 <code>值</code><br>因此 <code>d = c</code> 之後改動了 c[0] 這個位址的值<br>d 也會跟著變化。<br>除了 <code>array</code> ，同樣的事情也會發生在 <code>object</code></p>
+<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>基本型別值： call by value<br>複合型別： call by reference</p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p><a href="https://blog.techbridge.cc/2018/06/23/javascript-call-by-value-or-reference/" target="_blank" rel="noopener">https://blog.techbridge.cc/2018/06/23/javascript-call-by-value-or-reference/</a>)</p>
 
     </div>
 
@@ -211,9 +208,9 @@
             </div>
         </section> -->
     <section class="post-nav">
-      
-      <a class="prev" rel="prev" href="/2019/10/29/JavaScript的型別/">JavaScript 的型別</a>
        
+      <a class="next" rel="next" href="/2019/10/29/JavaScript的型別/">JavaScript 的型別</a>
+      
     </section>
   </article>
 </div>
