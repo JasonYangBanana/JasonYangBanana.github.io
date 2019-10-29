@@ -7,7 +7,7 @@
 
 
 
-<title>Hello World | Jason&#39;s Blog</title>
+<title>JavaScript 的型別 | Jason&#39;s Blog</title>
 
 
 
@@ -169,7 +169,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Hello World</h1>
+            <h1 class="post-title">JavaScript 的型別</h1>
             
                 <div class="post-meta">
                     
@@ -178,7 +178,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">August 1, 2019&nbsp;&nbsp;14:05:09</a>
+                        Date: <a href="#">October 29, 2019&nbsp;&nbsp;18:13:26</a>
                         </span>
                     
                     
@@ -187,19 +187,20 @@
         </header>
 
         <div class="post-content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+            <p>一開始進入 JavaScript 不免俗的要知道其型別。<br>分為兩種 <strong>基本型別值(Primitive)</strong> 和 <strong>物件型別(object)</strong></p>
+<h1 id="基本型別值"><a href="#基本型別值" class="headerlink" title="基本型別值"></a>基本型別值</h1><p>基本型別值有六種： <code>string</code> 、 <code>number</code> 、 <code>boolean</code> 、 <code>null</code> 、 <code>undefined</code> 和 <code>symbol</code>。</p>
+<p><code>string</code><br>字串是由許多字元組成，用來標示文字。</p>
+<p><code>number</code><br>JS 使用的是 IEEE 754 標準的 <strong>雙精度浮點數</strong>。<br>值得注意的是，浮點數運算存在著一些問題，最著名的就是 <code>0.1 + 0.2 === 0.3</code> 會得到 <code>false</code>。<br>在 ES6 後我們會使用下面這個方式來驗證兩數是否相等</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">0.1</span> + <span class="number">0.2</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">0.3</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">numberCloseEnoughToEqual</span>(<span class="params">n1, n2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.abs(n1 - n2) &lt; <span class="built_in">Number</span>.EPSILON</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(numberCloseEnoughToEqual(a, b)) <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>即是兩數的誤差在 <strong>容許值</strong> 範圍內</p>
+<p>值得注意的是<br><code>NaN</code> 雖然也屬於 number ，但是 <code>NaN</code> 代表的卻是無效的數字</p>
+<p><code>boolean</code><br>只有兩種值， <code>true</code> 與 <code>false</code> 。<br>值得注意的是有一些值在比較的時候會被強制轉型為 <code>false</code> ，稱之為 falsy<br>有 <code>&quot;&quot;</code> 、 <code>NaN</code> 、 <code>0</code> 、 <code>null</code> 、 <code>undefined</code>，其餘為 truthy 。</p>
+<p><code>null</code><br>null 用來標示空值，預留一個空位給變數。在 JS 中， 一個宣告未給值的變數，會是 <code>undefined</code>，而不是 <code>null</code> 。</p>
+<p><code>undefined</code><br>用來標示未定義，一個變數已經宣告，沒給值就會是 <code>undefined</code>。</p>
+<p><code>symbol</code><br>ES6 新增，目前還沒有實際使用過，無法很明確的描述其用途。</p>
+<h1 id="object-物件型別"><a href="#object-物件型別" class="headerlink" title="object(物件型別)"></a>object(物件型別)</h1><p>不屬於上述基本型別值的就屬於物件型別</p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>You Don’t know JS: Up &amp; Going, types &amp; Grammar</p>
 
         </div>
 
@@ -214,7 +215,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://yoursite.com/2019/08/01/hello-world/">http://yoursite.com/2019/08/01/hello-world/</a></span>
+                        <span><a href="http://yoursite.com/2019/10/29/JavaScript 的型別/">http://yoursite.com/2019/10/29/JavaScript 的型別/</a></span>
                     </p>
                 
                 
@@ -247,8 +248,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/10/29/JavaScript 的型別/">JavaScript 的型別</a>
             
+            <a class="next" rel="next" href="/2019/08/01/hello-world/">Hello World</a>
             
         </section>
 
