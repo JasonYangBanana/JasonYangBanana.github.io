@@ -7,7 +7,7 @@
 
 
 
-<title>閉包 | Jason&#39;s Blog</title>
+<title>深拷貝 | Jason&#39;s Blog</title>
 
 
 
@@ -164,7 +164,7 @@
 </script>  
   <article class="post-wrap">
     <header class="post-header">
-      <h1 class="post-title">閉包</h1>
+      <h1 class="post-title">深拷貝</h1>
       
       <div class="post-meta">
          Author:
@@ -172,7 +172,7 @@
          
         <span class="post-time">
           Date:
-          <a href="#">October 30, 2019&nbsp;&nbsp;23:35:20</a>
+          <a href="#">October 31, 2019&nbsp;&nbsp;3:28:38</a>
         </span>
          
       </div>
@@ -180,14 +180,22 @@
     </header>
 
     <div class="post-content">
-      <p>一個 function 在執行完後，其內的變數都會消亡，這個就稱之為語彙環境</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">'Stranger'</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">displayName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Hi~'</span> + name)</span><br><span class="line">  &#125;</span><br><span class="line">  displayName()</span><br><span class="line">&#125;</span><br><span class="line">sayHi()</span><br></pre></td></tr></table></figure>
+      <p>剛開始接觸到 JS 的時候，讀了相關書籍時，看到有關淺拷貝跟深拷貝的問題。<br>當下不是有很強烈的感覺，畢竟沒碰過。<br>直到我開始寫 Vue 時，要處理資料這一塊，使用了 <code>prop</code> 傳值到子 component 。<br>意外發現不需要 <code>emit</code> 回父 component ，這時才慶幸那時候知道 JS 有 call by reference 這個問題。</p>
+<p>既然如此，如果想要將資料拷貝，有幾種方式。</p>
+<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p>首先是使用 JSON 拷貝方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newObj = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(oldObj))</span><br></pre></td></tr></table></figure>
 
-<h1 id="閉包"><a href="#閉包" class="headerlink" title="閉包"></a>閉包</h1><p>而 closure 使我們可以調用其內的變數</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">adder</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> add</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> add2 = adder(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">const</span> add10 = adder(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add2(<span class="number">3</span>)) <span class="comment">//5</span></span><br><span class="line"><span class="built_in">console</span>.log(add10(<span class="number">3</span>)) <span class="comment">//13</span></span><br></pre></td></tr></table></figure>
+<p>使用 JSON 去拷貝，能良好的將你拿到的資料拷貝一份新的，無論他有幾層都可以。<br>缺點是因為 JSON 不能拷貝 function ，所以遇到 function 只能另闢蹊徑。</p>
+<h1 id="淺拷貝"><a href="#淺拷貝" class="headerlink" title="淺拷貝"></a>淺拷貝</h1><p>如果你的資料只有一層，使用淺拷貝即可</p>
+<h2 id="array"><a href="#array" class="headerlink" title="array"></a>array</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>, <span class="number">2</span>, &#123; <span class="attr">x</span>: <span class="number">1</span> &#125;]</span><br><span class="line"><span class="keyword">let</span> b = <span class="built_in">Array</span>.from(a) <span class="comment">//淺拷貝</span></span><br></pre></td></tr></table></figure>
 
-<p><code>add2</code> 和 <code>add10</code> 都已經呼叫完 <code>adder</code> 了，<br>這時候我們創造了兩個環境，<br>分別是 <code>x = 2</code> 的 <code>add2</code> 和 <code>x = 10</code> 的 <code>add10</code>，<br>所以可以做出不同的加法工具。</p>
-<p>最簡單的閉包大多有一個特性<br>一個 function 被另一個 function 包住，並 return。</p>
+<h2 id="object"><a href="#object" class="headerlink" title="object"></a>object</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> c = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: &#123; <span class="attr">w</span>: <span class="number">1</span>, <span class="attr">v</span>: <span class="number">2</span> &#125; &#125;</span><br><span class="line"><span class="keyword">let</span> d = <span class="built_in">Object</span>.assign(&#123;&#125;, c) <span class="comment">//淺拷貝</span></span><br></pre></td></tr></table></figure>
+
+<p>以上這兩種方式只能拷貝第一層，<br>第二層之後的還是會受 call by reference 影響，<br>即 <code>a[2]</code> 和 <code>b[2]</code> 、 <code>c.y</code> 和 <code>d.y</code> ，<br>其指向為同一位址。</p>
+<h1 id="深拷貝"><a href="#深拷貝" class="headerlink" title="深拷貝"></a>深拷貝</h1><p>如果有兩層的資料，又有 function 需要被拷貝，就要使用深拷貝了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">inputData</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> inputData !== <span class="string">'object'</span>) <span class="keyword">return</span> inputData</span><br><span class="line">  <span class="keyword">let</span> newCopy = <span class="built_in">Array</span>.isArray(inputData) ? [] : &#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> prop <span class="keyword">in</span> inputData) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> inputData[prop] === <span class="string">'object'</span>) &#123;</span><br><span class="line">      newCopy[prop] = deepCopy(inputData[prop])</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      newCopy[prop] = inputData[prop]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> newCopy</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這個 function 用到了遞迴，當遇到非 object 或 array 就會直接回傳輸入值，<br>如果是 object 或 array，就會創立一個新的 {} 或 [] 並再檢查一次</p>
 
     </div>
 
@@ -206,10 +214,8 @@
             </div>
         </section> -->
     <section class="post-nav">
-      
-      <a class="prev" rel="prev" href="/2019/10/31/深拷貝/">深拷貝</a>
        
-      <a class="next" rel="next" href="/2019/10/30/call-by-value,-call-by-reference/">call by value, call by reference</a>
+      <a class="next" rel="next" href="/2019/10/30/閉包/">閉包</a>
       
     </section>
   </article>
