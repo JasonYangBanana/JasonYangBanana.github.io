@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>this | Jason&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Jason&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/">Home</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/archives">Writing</a>
+                
+                    <a class="menu-item" href="/projects">Projects</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Jason&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/">Home</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                    <a class="menu-item" href="/archives">Writing</a>
+                
+                    <a class="menu-item" href="/projects">Projects</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>  
+  <article class="post-wrap">
+    <header class="post-header">
+      <h1 class="post-title">this</h1>
+      
+      <div class="post-meta">
+         Author:
+        <a itemprop="author" rel="author" href="/">Jason Yang</a>
+         
+        <span class="post-time">
+          Date:
+          <a href="#">October 31, 2019&nbsp;&nbsp;15:52:27</a>
+        </span>
+         
+      </div>
+      
+    </header>
+
+    <div class="post-content">
+      <p><code>this</code> 在函式中，主要是看<code>誰呼叫這個函式</code>。</p>
+<p>this 的四套規則：</p>
+<ol>
+<li>預設繫結</li>
+<li>隱含的繫結</li>
+<li>明確的繫結</li>
+<li>new 繫結</li>
+</ol>
+<h1 id="預設-binding"><a href="#預設-binding" class="headerlink" title="預設 binding"></a>預設 binding</h1><p>預設繫結為 global object，當其他規則都不符合的時候<br>就會使用此規則</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'global object'</span></span><br><span class="line">foo() <span class="comment">//'global object';</span></span><br></pre></td></tr></table></figure>
+
+<p>如果使用 <code>const a = &#39;global object&#39;;</code>，則會印出 <code>undefined</code>，因為 <code>const</code> 並不會讓 a 掛在 global object 下， 如果使用 <code>window.a = &#39;global object&#39;</code>，結果則和 <code>var</code> 一樣。<br>使用嚴格模式 <code>use strict</code> 則會得到 <code>TypeError</code> 。</p>
+<h1 id="隱含的-binding"><a href="#隱含的-binding" class="headerlink" title="隱含的 binding"></a>隱含的 binding</h1><p>是否有一個物件去 call 那個 <code>function</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  a: <span class="number">2</span>,</span><br><span class="line">  foo: foo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj.foo() <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 callback 的方式呼叫，也會因為呼叫的地點而將繫結斷開。<br>如下所示， printA 已經不是被 obj 所呼叫，<br>因此一樣使用預設繫結。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printA</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callPrintA</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  fn()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  a: <span class="number">2</span>,</span><br><span class="line">  printA: printA</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'global object A'</span></span><br><span class="line">callPrintA(obj.printA) <span class="comment">//'global object A'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="隱含的失去"><a href="#隱含的失去" class="headerlink" title="隱含的失去"></a>隱含的失去</h2><p>因為呼叫是 <code>bar</code> 呼叫 obj 內的 <code>printA</code>，（行為委派）<br>因此採用的是 global 下的 <code>global object</code> ，而不是印出 2 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printA</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  a: <span class="number">2</span>,</span><br><span class="line">  printA: printA</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> bar = obj.printA</span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'global object'</span></span><br><span class="line">bar() <span class="comment">//"global object"</span></span><br></pre></td></tr></table></figure>
+
+<p>由於是 <code>bar()</code> 呼叫了 <code>fn printA</code> 所以，是一個普通的呼叫，使用了預設繫結</p>
+<h1 id="明確的-binding"><a href="#明確的-binding" class="headerlink" title="明確的 binding"></a>明確的 binding</h1><p>使用 <code>call()</code> 、 <code>apply()</code> 、 <code>bind()</code></p>
+<h2 id="call"><a href="#call" class="headerlink" title="call()"></a>call()</h2><p>使用 <code>call()</code> ， this 會指定在物件上(有給第一個參數)(改變 this 指向)</p>
+<p>將 <code>this</code> 綁定 obj，在函式 bar 讓 <code>this</code> 明確的綁住 obj ，不管怎麼控制 bar 的綁定， <code>this</code> 都會是 obj。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">a</span>: <span class="number">2</span> &#125;</span><br><span class="line"><span class="keyword">var</span> bar = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  foo.call(obj)</span><br><span class="line">&#125;</span><br><span class="line">bar() <span class="comment">//2</span></span><br><span class="line">setTimeout(bar, <span class="number">100</span>) <span class="comment">//2</span></span><br><span class="line">bar.call(<span class="built_in">window</span>) <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="apply"><a href="#apply" class="headerlink" title="apply()"></a>apply()</h2><p><code>apply()</code> 跟 <code>call()</code> 大致上雷同，唯一不同是 <code>call()</code> 可以接受一連串的參數， <code>apply()</code> 則接受一組陣列形式的參數。</p>
+<h2 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h2><p><code>bind()</code> 會回傳一個 function，而這個 function， 經過處理， this 已經被綁定在指定的 obj 上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">a</span>: <span class="number">2</span> &#125;</span><br><span class="line"><span class="keyword">var</span> bar = foo.bind(obj)</span><br><span class="line">bar() <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+<p>由於 <code>bind()</code> return 一個 function，因此如果有參數，可以在 <code>bar()</code> 再帶參數。<br>如下，可以想成加工(強制 this 綁定在 obj)後的 <code>addToThis</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">obj = &#123;</span><br><span class="line">  num: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addToThis</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.num + a + b + c</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bar = addToThis.bind(obj)</span><br><span class="line">bar(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) <span class="comment">//8</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="new-binding"><a href="#new-binding" class="headerlink" title="new binding"></a>new binding</h2><p>無論是 function constructor 或 classes ，<br>使用 new 會創造出一個全新的物件， this 即指向這個物件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> peter = <span class="keyword">new</span> People(<span class="string">'Peter'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(peter.name) <span class="comment">//Peter</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>You Don’t know JS: Scope &amp; Closure, this &amp; Prototypes</p>
+
+    </div>
+
+    
+    <!-- <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section> -->
+    <section class="post-nav">
+       
+      <a class="next" rel="next" href="/2019/10/31/深拷貝/">深拷貝</a>
+      
+    </section>
+  </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Jason Yang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
